@@ -54,7 +54,6 @@ npm start
 The server will start on the specified port in your environment variables.
 
 ## API Endpoints
-# User Authentication Endpoints Documentation
 
 ## Endpoint: `/users/register`
 
@@ -111,6 +110,61 @@ The request body should be in JSON format and must include the following fields:
 {
   "email": "johndoe@example.com",
   "password": "password123"
+}
+```
+
+## Endpoint: `/users/profile`
+
+### Method: `GET`
+
+This endpoint retrieves the profile information of the currently authenticated user.
+
+---
+
+### Headers
+
+| Header         | Value              | Required |
+|----------------|--------------------|----------|
+| `Authorization`| `Bearer <JWT>`     | Yes      |
+
+---
+
+### Response Example
+
+```json
+{
+  "user": {
+    "_id": "660fe4734f278736e4812d9f",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "johndoe@example.com"
+  }
+}
+```
+
+## Endpoint: `/users/logout`
+
+### Method: `GET`
+
+This endpoint logs out the current user by clearing the authentication token from cookies and adding it to a blacklist to prevent further use.
+
+---
+
+### Headers
+
+| Header         | Value              | Required |
+|----------------|--------------------|----------|
+| `Authorization`| `Bearer <JWT>`     | Yes      |
+
+---
+
+### Response Example
+
+```json
+{
+  "message": "Logged out successfully"
 }
 ```
 
