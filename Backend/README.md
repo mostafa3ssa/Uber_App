@@ -54,7 +54,65 @@ npm start
 The server will start on the specified port in your environment variables.
 
 ## API Endpoints
-- **POST /api/users/register**: Register a new user.
+# User Authentication Endpoints Documentation
+
+## Endpoint: `/users/register`
+
+### Method: `POST`
+
+This endpoint is used to register a new user in the system.
+
+---
+
+## Request Body
+
+The request body should be in JSON format and must include the following fields:
+
+| Field               | Type   | Required | Description                                      |
+|---------------------|--------|----------|--------------------------------------------------|
+| `fullName.firstName`| String | Yes      | The first name of the user (min 3 characters).  |
+| `fullName.lastName` | String | Yes      | The last name of the user (min 3 characters).   |
+| `email`             | String | Yes      | The email address of the user (must be valid).  |
+| `password`          | String | Yes      | The password for the user (min 6 characters).   |
+
+### Example Request Body
+
+```json
+{
+  "fullName": {
+    "firstName": "John",
+    "lastName": "Doe"
+  },
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
+
+## Endpoint: `/users/login`
+
+### Method: `POST`
+
+This endpoint is used to authenticate an existing user and provide a JSON Web Token (JWT) for further requests.
+
+---
+
+## Request Body
+
+The request body should be in JSON format and must include the following fields:
+
+| Field      | Type   | Required | Description                                      |
+|------------|--------|----------|--------------------------------------------------|
+| `email`    | String | Yes      | The email address of the user (must be valid).  |
+| `password` | String | Yes      | The password for the user (min 6 characters).   |
+
+### Example Request Body
+
+```json
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
 
 ## Contributing
 Feel free to submit issues or pull requests for any improvements or bug fixes.
