@@ -239,6 +239,123 @@ The request body should be in JSON format and must include the following fields:
 | 400         | `Captain already exists` | A captain with the provided email already exists. |
 | 400         | `Please provide all required fields` | Missing required fields in the request body. |
 
+---
+
+## Endpoint: `/captains/login`
+
+### Method: `POST`
+
+This endpoint is used to authenticate an existing captain and provide a JSON Web Token (JWT) for further requests.
+
+---
+
+### Request Body
+
+The request body should be in JSON format and must include the following fields:
+
+| Field      | Type   | Required | Description                                      |
+|------------|--------|----------|--------------------------------------------------|
+| `email`    | String | Yes      | The email address of the captain (must be valid). |
+| `password` | String | Yes      | The password for the captain (min 6 characters). |
+
+### Example Request Body
+
+```json
+{
+  "email": "janedoe@example.com",
+  "password": "securepassword"
+}
+```
+
+---
+
+### Response Example
+
+```json
+{
+  "captain": {
+    "_id": "660fe4734f278736e4812d9f",
+    "fullName": {
+      "firstName": "Jane",
+      "lastName": "Doe"
+    },
+    "email": "janedoe@example.com",
+    "vechile": {
+      "color": "Red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vechileType": "car"
+    }
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+---
+
+## Endpoint: `/captains/profile`
+
+### Method: `GET`
+
+This endpoint retrieves the profile information of the currently authenticated captain.
+
+---
+
+### Headers
+
+| Header         | Value              | Required |
+|----------------|--------------------|----------|
+| `Authorization`| `Bearer <JWT>`     | Yes      |
+
+---
+
+### Response Example
+
+```json
+{
+  "captain": {
+    "_id": "660fe4734f278736e4812d9f",
+    "fullName": {
+      "firstName": "Jane",
+      "lastName": "Doe"
+    },
+    "email": "janedoe@example.com",
+    "vechile": {
+      "color": "Red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vechileType": "car"
+    }
+  }
+}
+```
+
+---
+
+## Endpoint: `/captains/logout`
+
+### Method: `GET`
+
+This endpoint logs out the current captain by clearing the authentication token from cookies and adding it to a blacklist to prevent further use.
+
+---
+
+### Headers
+
+| Header         | Value              | Required |
+|----------------|--------------------|----------|
+| `Authorization`| `Bearer <JWT>`     | Yes      |
+
+---
+
+### Response Example
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
 ## Contributing
 Feel free to submit issues or pull requests for any improvements or bug fixes.
 
